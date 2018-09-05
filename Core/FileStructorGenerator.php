@@ -101,10 +101,27 @@ class FileStructorGenerator
     /**
      * generate filepath / file if not exist
      */
-    protected function generateIfNotExists()
+    protected function generateIfNotExists($sFile = null)
     {
+        if (null !== $sFile) {
+            $this->sFilePath = $sFile;
+        }
+
         if (!$this->isFile($this->sFilePath)) {
             $this->generateFile($this->sFilePath);
         }
+    }
+
+    protected function readFile($sFilePath = null)
+    {
+        if (null === $sFilePath) {
+            if (null === $this->sFilePath) {
+                return false;
+            } else {
+                $sFilePath = $this->sFilePath;
+            }
+        }
+        $sContent = file_get_contents($sFilePath);
+        return $sContent;
     }
 }

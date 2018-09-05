@@ -4,9 +4,13 @@ namespace CodeCommerce\ModulSkeleton\Controller;
 
 use CodeCommerce\ModulSkeleton\Core\ComposerGenerator;
 use CodeCommerce\ModulSkeleton\Core\FileStructorGenerator;
+use CodeCommerce\ModulSkeleton\Core\MetadataGenerator;
 use CodeCommerce\ModulSkeleton\Model\ComposerVendorSettings;
 use CodeCommerce\ModulSkeleton\Model\ComposerVendorFile;
+use CodeCommerce\ModulSkeleton\Model\MetadataFile;
 use CodeCommerce\ModulSkeleton\Model\SkeletonConfiguration;
+use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\Request;
 
 /**
  * Class ModuleGenerator
@@ -67,6 +71,7 @@ class ModuleGeneratorController
             if ($this->oSkeletonConfiguration->getComposerUpdate()) {
                 $this->updateComposer();
             }
+            $this->generateMetadata();
         } catch (\Exception $e) {
             die($e->getMessage());
         }
@@ -176,17 +181,36 @@ class ModuleGeneratorController
         $oComposerGenerator = new ComposerGenerator($sPath);
         $oComposerGenerator->updateComposerArrayField(
             [
-                'require' => [
+                'require'      => [
                     $this->oComposerVendorFile->getComposerName() => $this->oComposerVendorFile->getComposerVersion(),
                 ],
                 'repositories' => [
                     $this->oComposerVendorFile->getComposerName() => [
                         'type' => 'path',
-                        'url' => "./".$this->oSkeletonConfiguration->getModulBasePath().$this->oComposerVendorFile->getComposerName()
-                    ]
+                        'url'  => "./" . $this->oSkeletonConfiguration->getModulBasePath() . $this->oComposerVendorFile->getComposerName(),
+                    ],
                 ],
             ]
         );
         $oComposerGenerator->saveComposerFile();
+    }
+
+    protected function generateMetadata()
+    {
+        $oMetadataFile = new MetadataFile();
+        $oMetadataFile
+            ->setName($this->oComposerVendorFile->getModulName())
+            ->setTitle($this->getModuleName())
+            ->setModuleVersion($this->oSkeletonConfiguration->getMetadata()['modul_version'])
+            ->setVersion($this->oSkeletonConfiguration->getMetadata()['metadata_version'])
+            ->setThumbnail($this->oSkeletonConfiguration->getMetadata()['thumbnail'])
+            ->setPath($this->getModulePath());
+
+        $oMetadataGenerator = new MetadataGenerator($oMetadataFile);
+    }
+
+    protected function getModuleName()
+    {
+        return strtolower($this->oComposerVendorFile->getVendorNamespace() . "_" . $this->oComposerVendorFile->getModulName());
     }
 }

@@ -8,20 +8,20 @@ vendor:
     namespace: CodeCommerce
     homepage: https://www.codecommerce.de
     email: info@codecommerce.de
-  burda:
-    namespace: Bds
-    homepage: https://www.valiton.de
-    email: info@codecommerce.de
+#  burda:
+#    namespace: Bds
+#    homepage: https://www.valiton.de
+#    email: info@codecommerce.de
 
 authors:
   Christopher:
     name: Christopher Bauer
     email: chris@codecommerce.de
     homepage: https://www.codecommerce.de
-  Andreas:
-    name: Andreas Melsa-Hübel
-    email: andreas@seine-mail.de
-    homepage: https://www.codecommerce.de
+#  Andreas:
+#    name: Andreas Melsa-Hübel
+#    email: andreas@seine-mail.de
+#    homepage: https://www.codecommerce.de
 
 filestructur:
   generate_directories: true
@@ -40,3 +40,8 @@ filestructur:
   generate_files: true
   files:
     - "setup/install.sql"
+
+metadata:
+  thumbnail: 'dies_ist_eine_url'
+  modul_version: '1.0'
+  metadata_version: '2.1'

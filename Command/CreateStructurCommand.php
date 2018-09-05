@@ -366,7 +366,9 @@ class CreateStructurCommand extends Command
                 ->setFileStructurDirectories($aSkeletonConfiguration['filestructur']['directories'])
                 ->setGenerateFiles($aSkeletonConfiguration['filestructur']['generate_files'])
                 ->setFileToGenerate($aSkeletonConfiguration['filestructur']['files'])
-                ->setComposerUpdate($aSkeletonConfiguration['parameters']['composer_update']);
+                ->setComposerUpdate($aSkeletonConfiguration['parameters']['composer_update'])
+                ->setMetadata($aSkeletonConfiguration['metadata'])
+            ;
         }
     }
 

@@ -73,15 +73,8 @@ class ComposerGenerator extends FileStructorGenerator
      */
     public function readComposerFile($sFilePath = null)
     {
-        if (null === $sFilePath) {
-            if (null === $this->sFilePath) {
-                return false;
-            } else {
-                $sFilePath = $this->sFilePath;
-            }
-        }
-        $sInput = file_get_contents($sFilePath);
-        $oComposer = json_decode($sInput);
+        $sConent = $this->readFile($sFilePath);
+        $oComposer = json_decode($sConent);
 
         return $oComposer;
     }

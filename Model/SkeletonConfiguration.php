@@ -56,6 +56,30 @@ class SkeletonConfiguration
     protected $composer_update;
 
     /**
+     * @var
+     */
+    protected $metadata;
+
+    /**
+     * @return mixed
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @param mixed $metadata
+     * @return SkeletonConfiguration
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getComposerUpdate()
