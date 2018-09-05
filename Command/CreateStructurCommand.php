@@ -68,24 +68,49 @@ class CreateStructurCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // outputs multiple lines to the console (adding "\n" at the end of each line)
+        try {
+            // outputs multiple lines to the console (adding "\n" at the end of each line)
+            $output->writeln([
+                '==============',
+                'Modul Skeleton',
+                '==============',
+                '',
+            ]);
+            $output->writeln('Arguments');
+
+            $this->checkConfigurationExists($output);
+
+            $this->setUserInputModuleSettings($input, $output);
+            $this->setUserInputComposerJson($input, $output);
+
+            $this->outputUserInputSettings($output);
+            $this->getUserInputModuleGenerationConfirmation($input, $output);
+            $this->setUserInputToComposerVendorFile();
+            $this->checkIfModuleExistsAndGenerateModule($input, $output);
+        } catch (\Exception $e) {
+            $output->writeln($e->getMessage());
+            exit();
+        }
         $output->writeln([
-            '==============',
-            'Modul Skeleton',
-            '==============',
-            '',
+            '<info>',
+            '===========================',
+            '===========================',
+            'Modul generated successfull',
+            '</info>',
         ]);
-        $output->writeln('Arguments');
+    }
 
-        $this->checkConfigurationExists($output);
+    protected function checkIfModuleExistsAndGenerateModule(InputInterface $input, OutputInterface $output)
+    {
+        $oModuleGenerator = new ModuleGeneratorController($this->oSkeletonConfiguration, $this->oComposerVendorFile);
 
-        $this->setUserInputModuleSettings($input, $output);
-        $this->setUserInputComposerJson($input, $output);
-
-        $this->outputUserInputSettings($output);
-        $this->getUserInputModuleGenerationConfirmation($input, $output);
-        $this->setUserInputToComposerVendorFile();
-        $this->startModuleGeneration();
+        if ($oModuleGenerator->checkIfModuleExists()) {
+            $output->writeln('<error>Modulename exists - please set new</error>');
+            $this->oComposerVendorFile->setModulName($this->setUserInputModuleName($input, $output));
+            $this->checkIfModuleExistsAndGenerateModule($input, $output);
+        } else {
+            $this->startModuleGeneration($oModuleGenerator);
+        }
     }
 
     /**
@@ -101,13 +126,12 @@ class CreateStructurCommand extends Command
 
     /**
      * @param OutputInterface $output
+     * @throws \Exception
      */
     protected function checkConfigurationExists(OutputInterface $output)
     {
         if (empty($this->aConfiguration)) {
-            $output->writeln('<error>Configurationfile under ' . $this->sYmlConfigurationPath . ' missing!</error>');
-
-            exit();
+            throw new \Exception('<error>Configurationfile under ' . $this->sYmlConfigurationPath . ' missing!</error>');
         }
     }
 
@@ -115,6 +139,7 @@ class CreateStructurCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      * @return string
+     * @throws \Exception
      */
     protected function setUserInputModuleName(InputInterface $input, OutputInterface $output): string
     {
@@ -134,8 +159,7 @@ class CreateStructurCommand extends Command
             });
             $question->setMaxAttempts(5);
             if (!$sModuleName = $helper->ask($input, $output, $question)) {
-                $output->writeln('<error>Modulename missing. Stopping generation.</error>');
-                exit();
+                throw new \Exception('<error>Modulename missing. Stopping generation.</error>');
             }
         }
 
@@ -206,6 +230,7 @@ class CreateStructurCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      * @return bool
+     * @throws \Exception
      */
     protected function getUserInputModuleGenerationConfirmation(InputInterface $input, OutputInterface $output): bool
     {
@@ -215,10 +240,9 @@ class CreateStructurCommand extends Command
             true,
             '/^(y|j)/i'
         );
-        $question->setMaxAttempts(2);
+        $question->setMaxAttempts(3);
         if (!$helper->ask($input, $output, $question)) {
-            $output->writeln('<error>Stopping generation</error>');
-            exit();
+            throw new \Exception('<error>Stopping generation</error>');
         }
 
         return true;
@@ -227,6 +251,7 @@ class CreateStructurCommand extends Command
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @throws \Exception
      */
     protected function getUserInputComposerSettings(InputInterface $input, OutputInterface $output)
     {
@@ -254,8 +279,7 @@ class CreateStructurCommand extends Command
         });
         $question->setMaxAttempts(2);
         if (!$sVersion = $helper->ask($input, $output, $question)) {
-            $output->writeln('<error>Version missing. Stopping generation.</error>');
-            exit();
+            throw new \Exception('<error>Version missing. Stopping generation.</error>');
         }
 
         return $sVersion;
@@ -281,8 +305,7 @@ class CreateStructurCommand extends Command
         });
         $question->setMaxAttempts(2);
         if (!$sVersion = $helper->ask($input, $output, $question)) {
-            $output->writeln('<error>Version missing. Stopping generation.</error>');
-            exit();
+            throw new \Exception('<error>Version missing. Stopping generation.</error>');
         }
 
         return $sVersion;
@@ -306,12 +329,16 @@ class CreateStructurCommand extends Command
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @throws \Exception
      */
     protected function setUserInputModuleSettings(InputInterface $input, OutputInterface $output)
     {
-        $this->aUserInput['module_name'] = $this->setUserInputModuleName($input, $output);
+        /**
+         * @todo check if modulename is set before - question if overwrite
+         */
         $this->aUserInput['vendor_name'] = $this->getUserInputVendorSettingsName($input, $output);
         $this->aUserInput['author_name'] = $this->getUserInputAuthorSettingsName($input, $output);
+        $this->aUserInput['module_name'] = $this->setUserInputModuleName($input, $output);
     }
 
     /**
@@ -367,17 +394,15 @@ class CreateStructurCommand extends Command
                 ->setGenerateFiles($aSkeletonConfiguration['filestructur']['generate_files'])
                 ->setFileToGenerate($aSkeletonConfiguration['filestructur']['files'])
                 ->setComposerUpdate($aSkeletonConfiguration['parameters']['composer_update'])
-                ->setMetadata($aSkeletonConfiguration['metadata'])
-            ;
+                ->setMetadata($aSkeletonConfiguration['metadata']);
         }
     }
 
     /**
      *
      */
-    protected function startModuleGeneration()
+    protected function startModuleGeneration(ModuleGeneratorController $oModuleGenerator)
     {
-        $oModuleGenerator = new ModuleGeneratorController($this->oSkeletonConfiguration, $this->oComposerVendorFile);
         $oModuleGenerator->generateModule();
     }
 }

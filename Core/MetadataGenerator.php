@@ -52,9 +52,9 @@ class MetadataGenerator extends FileStructorGenerator
             $sTemplateContent);
         $sTemplateContent = str_replace('##module_version##', $this->oMetadataFile->getModuleVersion(),
             $sTemplateContent);
-        $sTemplateContent = str_replace('##module_author##', 'Author', $sTemplateContent);
-        $sTemplateContent = str_replace('##module_email##', 'Email', $sTemplateContent);
-        $sTemplateContent = str_replace('##module_url##', 'Url', $sTemplateContent);
+        $sTemplateContent = str_replace('##module_author##', $this->oMetadataFile->getAuthor(), $sTemplateContent);
+        $sTemplateContent = str_replace('##module_email##', $this->oMetadataFile->getMail(), $sTemplateContent);
+        $sTemplateContent = str_replace('##module_url##', $this->oMetadataFile->getUrl(), $sTemplateContent);
 
         return $sTemplateContent;
     }

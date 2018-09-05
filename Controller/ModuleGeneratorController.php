@@ -204,7 +204,11 @@ class ModuleGeneratorController
             ->setModuleVersion($this->oSkeletonConfiguration->getMetadata()['modul_version'])
             ->setVersion($this->oSkeletonConfiguration->getMetadata()['metadata_version'])
             ->setThumbnail($this->oSkeletonConfiguration->getMetadata()['thumbnail'])
-            ->setPath($this->getModulePath());
+            ->setPath($this->getModulePath())
+            ->setAuthor($this->oComposerVendorFile->getAuthorName())
+            ->setUrl($this->oComposerVendorFile->getAuthorHomepage())
+            ->setMail($this->oComposerVendorFile->getAuthorEmail())
+            ->setDescription($this->oComposerVendorFile->getComposerDescription());
 
         $oMetadataGenerator = new MetadataGenerator($oMetadataFile);
     }
@@ -212,5 +216,13 @@ class ModuleGeneratorController
     protected function getModuleName()
     {
         return strtolower($this->oComposerVendorFile->getVendorNamespace() . "_" . $this->oComposerVendorFile->getModulName());
+    }
+
+    public function checkIfModuleExists()
+    {
+        if ($this->getFileStructor()->isDir($this->getModulePath())) {
+            return true;
+        }
+        return false;
     }
 }

@@ -17,7 +17,7 @@ class FileStructorGenerator
      * @param $sDir
      * @return bool
      */
-    protected function isDir($sDir)
+    public function isDir($sDir)
     {
         return is_dir($sDir) && file_exists($sDir);
     }
