@@ -1,0 +1,42 @@
+parameters:
+  basepath: ../../../
+  modulebasepath: source/modules/
+  composer_update: false
+
+vendor:
+  codecommerce:
+    namespace: CodeCommerce
+    homepage: https://www.codecommerce.de
+    email: info@codecommerce.de
+  burda:
+    namespace: Bds
+    homepage: https://www.valiton.de
+    email: info@codecommerce.de
+
+authors:
+  Christopher:
+    name: Christopher Bauer
+    email: chris@codecommerce.de
+    homepage: https://www.codecommerce.de
+  Andreas:
+    name: Andreas Melsa-Hübel
+    email: andreas@seine-mail.de
+    homepage: https://www.codecommerce.de
+
+filestructur:
+  generate_directories: true
+  directories:
+    - "Core/Events"
+    - "Controller/Admin"
+    - "Model"
+    - "out/src/css"
+    - "out/src/img"
+    - "out/src/js"
+    - "setup"
+    - "translations/de"
+    - "views/admin/de"
+    - "views/admin/tpl"
+    - "views/blocks"
+  generate_files: true
+  files:
+    - "setup/install.sql"

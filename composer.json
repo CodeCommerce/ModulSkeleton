@@ -1,0 +1,34 @@
+{
+  "name": "codecommerce/module_skeleton",
+  "description": "Erstellung eines Modulskeletons",
+  "keywords": [
+    "oxid",
+    "modules",
+    "tools",
+    "CodeCommerce",
+    "Modul Skeleton"
+  ],
+  "homepage": "https://www.codecommerce.de",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christopher Bauer",
+      "email": "chris@codecommerce.de",
+      "homepage": "https://www.codecommerce.de",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "info@codecommerce.de"
+  },
+  "require": {
+    "symfony/console": "*",
+    "symfony/yaml": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodeCommerce\\ModulSkeleton\\": "../../../tools/ModulSkeleton"
+    }
+  },
+  "version": "1.0.0"
+}
