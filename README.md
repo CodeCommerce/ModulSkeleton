@@ -1,3 +1,5 @@
+# Modul is under construction! Not all function works default
+
 # ModulSkeleton
 Tool to generate Modules for OXID V6
 
