@@ -5,7 +5,7 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use CodeCommerce\ModulSkeleton\Command\CreateStructurCommand;
+use CodeCommerce\ModuleSkeleton\Command\CreateStructurCommand;
 
 $application = new Application();
 // ... register commands

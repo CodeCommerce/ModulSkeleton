@@ -4,24 +4,16 @@ parameters:
   composer_update: false
 
 vendor:
-  mein_vendor:
-    namespace: foo
-    homepage: https://www.foo.de
-    email: info@foo.de
-  dein_vendor:
-    namespace: bar
-    homepage: https://www.bar.de
-    email: info@bar.de
+  moduleskeleton:
+    namespace: moduleskeleton
+    homepage: https://www.musdertomain.de
+    email: info@musdertomain.de
 
 authors:
-  mein_autor:
-    name: Max Mustermann
-        email: max@mustermann.de
-        homepage: https://www.musterdomain.de
-  dein_autor:
+  Max:
     name: Max Mustermann
     email: max@mustermann.de
-    homepage: https://www.musterdomain.de
+    homepage: https://www.musdertomain.de
 
 filestructur:
   generate_directories: true

@@ -1,10 +1,10 @@
 <?php
 
-namespace CodeCommerce\ModulSkeleton\Core;
+namespace CodeCommerce\ModuleSkeleton\Core;
 
 /**
  * Class FileStructorGenerator
- * @package CodeCommerce\ModulSkeleton\Core
+ * @package CodeCommerce\ModuleSkeleton\Core
  */
 class FileStructorGenerator
 {

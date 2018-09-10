@@ -6,20 +6,12 @@
  * Time: 16:21
  */
 
-namespace CodeCommerce\ModulSkeleton\Model;
+namespace CodeCommerce\ModuleSkeleton\Model;
 
 
 /**
  * Class SkeletonConfiguration
- * @package CodeCommerce\ModulSkeleton\Model
- */
-/**
- * Class SkeletonConfiguration
- * @package CodeCommerce\ModulSkeleton\Model
- */
-/**
- * Class SkeletonConfiguration
- * @package CodeCommerce\ModulSkeleton\Model
+ * @package CodeCommerce\ModuleSkeleton\Model
  */
 class SkeletonConfiguration
 {

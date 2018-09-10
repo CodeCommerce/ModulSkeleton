@@ -1,6 +1,6 @@
 {
   "name": "codecommerce/module_skeleton",
-  "description": "Erstellung eines Modulskeletons",
+  "description": "Erstellung eines Moduleskeletons",
   "keywords": [
     "oxid",
     "modules",
@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "CodeCommerce\\ModulSkeleton\\": "../../../tools/ModulSkeleton"
+      "CodeCommerce\\ModuleSkeleton\\": "../../../tools/ModuleSkeleton"
     }
   },
   "version": "1.0.0"

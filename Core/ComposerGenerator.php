@@ -1,19 +1,19 @@
 <?php
 
-namespace CodeCommerce\ModulSkeleton\Core;
+namespace CodeCommerce\ModuleSkeleton\Core;
 
 /**
  * Class ComposerGenerator
- * @package CodeCommerce\ModulSkeleton\Core
+ * @package CodeCommerce\ModuleSkeleton\Core
  */
 
-use CodeCommerce\ModulSkeleton\Model\ComposerFile;
+use CodeCommerce\ModuleSkeleton\Model\ComposerFile;
 
-// use CodeCommerce\ModulSkeleton\Model\ComposerVendorSettings;
+// use CodeCommerce\ModuleSkeleton\Model\ComposerVendorSettings;
 
 /**
  * Class ComposerGenerator
- * @package CodeCommerce\ModulSkeleton\Core
+ * @package CodeCommerce\ModuleSkeleton\Core
  */
 class ComposerGenerator extends FileStructorGenerator
 {

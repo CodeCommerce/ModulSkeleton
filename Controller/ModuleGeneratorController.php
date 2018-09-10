@@ -1,20 +1,20 @@
 <?php
 
-namespace CodeCommerce\ModulSkeleton\Controller;
+namespace CodeCommerce\ModuleSkeleton\Controller;
 
-use CodeCommerce\ModulSkeleton\Core\ComposerGenerator;
-use CodeCommerce\ModulSkeleton\Core\FileStructorGenerator;
-use CodeCommerce\ModulSkeleton\Core\MetadataGenerator;
-use CodeCommerce\ModulSkeleton\Model\ComposerVendorSettings;
-use CodeCommerce\ModulSkeleton\Model\ComposerVendorFile;
-use CodeCommerce\ModulSkeleton\Model\MetadataFile;
-use CodeCommerce\ModulSkeleton\Model\SkeletonConfiguration;
+use CodeCommerce\ModuleSkeleton\Core\ComposerGenerator;
+use CodeCommerce\ModuleSkeleton\Core\FileStructorGenerator;
+use CodeCommerce\ModuleSkeleton\Core\MetadataGenerator;
+use CodeCommerce\ModuleSkeleton\Model\ComposerVendorSettings;
+use CodeCommerce\ModuleSkeleton\Model\ComposerVendorFile;
+use CodeCommerce\ModuleSkeleton\Model\MetadataFile;
+use CodeCommerce\ModuleSkeleton\Model\SkeletonConfiguration;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\Request;
 
 /**
  * Class ModuleGenerator
- * @package CodeCommerce\ModulSkeleton\Core
+ * @package CodeCommerce\ModuleSkeleton\Core
  */
 class ModuleGeneratorController
 {
@@ -101,7 +101,7 @@ class ModuleGeneratorController
     protected function createFileStructur(): bool
     {
         if (!$this->oSkeletonConfiguration->getGenerateFileStructur()) {
-            return false;
+            return;
         }
 
         $bGenerated = $this->getFileStructor()->generateFileStructur($this->getModulePath());

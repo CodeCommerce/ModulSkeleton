@@ -6,7 +6,7 @@
  * Time: 15:02
  */
 
-namespace CodeCommerce\ModulSkeleton\Model;
+namespace CodeCommerce\ModuleSkeleton\Model;
 
 
 class MetadataFile

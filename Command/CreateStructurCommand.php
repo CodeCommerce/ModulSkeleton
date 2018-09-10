@@ -1,10 +1,10 @@
 <?php
 
-namespace CodeCommerce\ModulSkeleton\Command;
+namespace CodeCommerce\ModuleSkeleton\Command;
 
-use CodeCommerce\ModulSkeleton\Controller\ModuleGeneratorController;
-use CodeCommerce\ModulSkeleton\Model\ComposerVendorFile;
-use CodeCommerce\ModulSkeleton\Model\SkeletonConfiguration;
+use CodeCommerce\ModuleSkeleton\Controller\ModuleGeneratorController;
+use CodeCommerce\ModuleSkeleton\Model\ComposerVendorFile;
+use CodeCommerce\ModuleSkeleton\Model\SkeletonConfiguration;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CreateStructurCommand
- * @package CodeCommerce\ModulSkeleton\Command
+ * @package CodeCommerce\ModuleSkeleton\Command
  */
 class CreateStructurCommand extends Command
 {
@@ -24,6 +24,7 @@ class CreateStructurCommand extends Command
      * @var string
      */
     protected $sYmlConfigurationPath = __DIR__ . "/../Config/module_skeleton_configuration.yml";
+    protected $sYmlPersonaConfigurationPath = __DIR__ . "/../Config/module_skeleton_personal.yml";
     /**
      * @var array
      */
@@ -120,8 +121,23 @@ class CreateStructurCommand extends Command
     {
         if (file_exists($this->sYmlConfigurationPath)) {
             $this->aConfiguration = Yaml::parse(file_get_contents($this->sYmlConfigurationPath));
+            $this->setPersonalConfiguration();
             $this->setSkeletonConfiguration();
         }
+    }
+
+    protected function setPersonalConfiguration()
+    {
+        if (file_exists($this->sYmlPersonaConfigurationPath)) {
+            $aPersonalConfig = Yaml::parse(file_get_contents($this->sYmlPersonaConfigurationPath));
+            $this->updatePersonalConfigArray($this->aConfiguration, $aPersonalConfig);
+        }
+    }
+
+    protected function updatePersonalConfigArray($aGeneralConfig, $aPersonalConfig)
+    {
+        $this->aConfiguration = array_replace_recursive($aGeneralConfig, $aPersonalConfig);
+        $this->aConfiguration = array_replace($aGeneralConfig, $aPersonalConfig);
     }
 
     /**
@@ -401,8 +417,10 @@ class CreateStructurCommand extends Command
     /**
      *
      */
-    protected function startModuleGeneration(ModuleGeneratorController $oModuleGenerator)
-    {
+    protected
+    function startModuleGeneration(
+        ModuleGeneratorController $oModuleGenerator
+    ) {
         $oModuleGenerator->generateModule();
     }
 }

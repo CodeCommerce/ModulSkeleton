@@ -6,7 +6,7 @@
  * Time: 16:07
  */
 
-namespace CodeCommerce\ModulSkeleton\Model;
+namespace CodeCommerce\ModuleSkeleton\Model;
 
 
 class ComposerVendorFile extends ComposerFile
@@ -81,7 +81,7 @@ class ComposerVendorFile extends ComposerFile
 
     public function getComposerName()
     {
-        return $this->getVendorNamespace() . "/" . $this->getModulName();
+        return strtolower($this->getVendorNamespace() . "/" . $this->getModulName());
     }
 
     /**
@@ -244,8 +244,9 @@ class ComposerVendorFile extends ComposerFile
 
         $sVendorNamespace = $this->getComposerNamespaceFormated();
         $sPsr4 = 'psr-4';
-        $sComposerPsr4Path = dirname($this->getFilePath()) . "/";
-        $oComposer->autoload->{$sPsr4} = [$sVendorNamespace => $sComposerPsr4Path];
+//        $sComposerPsr4Path = dirname($this->getFilePath()) . "/";
+//        $oComposer->autoload->{$sPsr4} = [$sVendorNamespace => $sComposerPsr4Path];
+        $oComposer->autoload->{$sPsr4} = './';
         $oComposer->version = $this->getComposerVersion();
 
         return $oComposer;

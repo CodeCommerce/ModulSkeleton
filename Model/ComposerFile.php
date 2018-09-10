@@ -6,7 +6,7 @@
  * Time: 15:45
  */
 
-namespace CodeCommerce\ModulSkeleton\Model;
+namespace CodeCommerce\ModuleSkeleton\Model;
 
 
 class ComposerFile

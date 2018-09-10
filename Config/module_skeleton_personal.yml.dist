@@ -1,0 +1,4 @@
+## please copy file from module_skeleton_personal.yml.dist to module_skeleton_personal.yml
+## set your configuration parameters
+## this configuration will overwrite configuration set in module_skeleton_configuration.yml
+## have a look at module_skeleton_configuration.yml for possible configuration parameters

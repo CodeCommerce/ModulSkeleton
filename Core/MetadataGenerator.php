@@ -6,10 +6,10 @@
  * Time: 15:01
  */
 
-namespace CodeCommerce\ModulSkeleton\Core;
+namespace CodeCommerce\ModuleSkeleton\Core;
 
 
-use CodeCommerce\ModulSkeleton\Model\MetadataFile;
+use CodeCommerce\ModuleSkeleton\Model\MetadataFile;
 
 class MetadataGenerator extends FileStructorGenerator
 {
