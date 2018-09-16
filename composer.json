@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "CodeCommerce\\ModuleSkeleton\\": "../../../tools/ModuleSkeleton"
+      "CodeCommerce\\ModuleSkeleton\\": "./"
     }
   },
   "version": "1.0.0"
