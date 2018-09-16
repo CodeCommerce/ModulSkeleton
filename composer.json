@@ -23,7 +23,7 @@
   },
   "require": {
     "symfony/console": "^v2.8",
-    "symfony/yaml": "^v2.8",
+    "symfony/yaml": "^v2.8"
   },
   "autoload": {
     "psr-4": {
