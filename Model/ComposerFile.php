@@ -46,6 +46,9 @@ class ComposerFile
     public function updateArrayFieldWithValue($sKey, $sField, $sValue)
     {
         $oComposerContent = $this->getContent();
+        if(!array_key_exists($sKey, $oComposerContent)){
+            $oComposerContent->{$sKey} = new \stdClass();
+        }
         $oComposerContent->{$sKey}->{$sField} = $sValue;
         $this->setContent($oComposerContent);
     }
