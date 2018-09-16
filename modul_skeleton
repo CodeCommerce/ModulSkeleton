@@ -1,9 +1,13 @@
 #!/usr/bin/env php
 <?php
-// application.php
 
-//require __DIR__ . '/../../vendor/autoload.php';
-require __DIR__ . '/../../../vendor/autoload.php';
+if(file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
+    require __DIR__ . '/../../../vendor/autoload.php';
+}elseif (file_exists(require __DIR__ . '/../../vendor/autoload.php')){
+    require __DIR__ . '/../../vendor/autoload.php';
+}else{
+    die('Autoload.php not found');
+}
 
 use Symfony\Component\Console\Application;
 use CodeCommerce\ModuleSkeleton\Command\CreateStructurCommand;

@@ -79,9 +79,14 @@ class ComposerVendorFile extends ComposerFile
         return $this;
     }
 
-    public function getComposerName()
+    public function getComposerName($bToLower = true)
     {
-        return strtolower($this->getVendorNamespace() . "/" . $this->getModulName());
+        $sComposerName = $this->getVendorNamespace() . "/" . $this->getModulName();
+        if ($bToLower) {
+            $sComposerName = strtolower($sComposerName);
+        }
+
+        return $sComposerName;
     }
 
     /**
@@ -219,7 +224,7 @@ class ComposerVendorFile extends ComposerFile
 
     protected function getComposerNamespaceFormated()
     {
-        $sVendorName = $this->getComposerName();
+        $sVendorName = $this->getComposerName(false);
         $sVendorNamespace = $sVendorName . "/";
         $sVendorNamespace = str_replace("//", "/", $sVendorNamespace);
         $sVendorNamespace = str_replace("/", "\\", $sVendorNamespace);
@@ -232,6 +237,7 @@ class ComposerVendorFile extends ComposerFile
         $oComposer = new \stdClass();
         $oComposer->name = $this->getComposerName();
         $oComposer->description = $this->getComposerDescription();
+        $oComposer->version = $this->getComposerVersion();
         $oComposer->homepage = $this->getVendorHomepage();
         $oComposer->author = new \stdClass();
         $oComposer->author->name = $this->getAuthorName();
@@ -240,14 +246,13 @@ class ComposerVendorFile extends ComposerFile
         $oComposer->support = new \stdClass();
         $oComposer->support->email = $this->getVendorEmail();
         $oComposer->support->homepage = $this->getVendorHomepage();
-        $oComposer->autoload = new \stdClass();
 
         $sVendorNamespace = $this->getComposerNamespaceFormated();
-        $sPsr4 = 'psr-4';
-//        $sComposerPsr4Path = dirname($this->getFilePath()) . "/";
-//        $oComposer->autoload->{$sPsr4} = [$sVendorNamespace => $sComposerPsr4Path];
-        $oComposer->autoload->{$sPsr4} = './';
-        $oComposer->version = $this->getComposerVersion();
+        $oComposer->autoload = [
+            'psr-4' => [
+                $sVendorNamespace => "./"
+            ]
+        ];
 
         return $oComposer;
     }

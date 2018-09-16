@@ -22,8 +22,8 @@
     "email": "info@codecommerce.de"
   },
   "require": {
-    "symfony/console": "^v2.8",
-    "symfony/yaml": "^v2.8"
+    "symfony/console": "*",
+    "symfony/yaml": "*"
   },
   "autoload": {
     "psr-4": {
