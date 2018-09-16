@@ -1,5 +1,5 @@
 parameters:
-  basepath: ../../../
+  basepath: ../../../../
   modulebasepath: source/modules/
   composer_update: false
 
