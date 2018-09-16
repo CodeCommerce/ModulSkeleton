@@ -24,7 +24,8 @@ class CreateStructurCommand extends Command
      * @var string
      */
     protected $sYmlConfigurationPath = __DIR__ . "/../Config/module_skeleton_configuration.yml";
-    protected $sYmlPersonaConfigurationPath = __DIR__ . "/../Config/module_skeleton_personal.yml";
+    protected $sYmlPersonaConfigurationPath = __DIR__ . "/../../../../source/skeleton/module_skeleton_personal.yml";
+
     /**
      * @var array
      */
