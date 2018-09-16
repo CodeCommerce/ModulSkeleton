@@ -131,7 +131,9 @@ class CreateStructurCommand extends Command
     {
         if (file_exists($this->sYmlPersonaConfigurationPath)) {
             $aPersonalConfig = Yaml::parse(file_get_contents($this->sYmlPersonaConfigurationPath));
-            $this->updatePersonalConfigArray($this->aConfiguration, $aPersonalConfig);
+            if(is_array($aPersonalConfig)) {
+                $this->updatePersonalConfigArray($this->aConfiguration, $aPersonalConfig);
+            }
         }
     }
 

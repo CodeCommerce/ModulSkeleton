@@ -3,8 +3,22 @@
 # ModulSkeleton
 Tool to generate Modules for OXID V6
 
-## Configuration
-Copy /Config/module_skeleton_configuration.yml.dist to /Config/module_skeleton_configuration.yml and update your settings
+## Installation
+Via Composer 
 
+    composer require codecommerce/module_skeleton --dev
+    
+## Configuration
+Copy file from
+
+    vendor/codecommerce/module_skeleton/Config/module_skeleton_persona.yml.dist
+to
+     
+     source/skeleton/module_skeleton_personal.yml
+     
+Change your keys if you want to.
+Have a look to vendor/codecommerce/module_skeleton/Config/module_skeleton_configuration.yml to see what settings you can change
+   
 ## Usage
-php tools/ModulSkeleton/modul_skeleton ox:mo:cr
+    php vendor/codecommerce/module_skeleton/modul_skeleton ox:mo:cr
+
