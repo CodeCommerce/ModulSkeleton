@@ -101,7 +101,7 @@ class ModuleGeneratorController
     protected function createFileStructur(): bool
     {
         if (!$this->oSkeletonConfiguration->getGenerateFileStructur()) {
-            return;
+            return false;
         }
 
         $bGenerated = $this->getFileStructor()->generateFileStructur($this->getModulePath());
