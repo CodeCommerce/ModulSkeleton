@@ -1,18 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Chris
- * Date: 04.09.18
- * Time: 15:45
- */
 
 namespace CodeCommerce\ModuleSkeleton\Model;
 
-
+/**
+ * Class ComposerFile
+ * @package CodeCommerce\ModuleSkeleton\Model
+ */
 class ComposerFile
 {
+    /**
+     * @var
+     */
     protected $oContent;
 
+    /**
+     * ComposerFile constructor.
+     * @param null $oContent
+     */
     public function __construct($oContent = null)
     {
         if (null !== $oContent) {
@@ -46,7 +50,7 @@ class ComposerFile
     public function updateArrayFieldWithValue($sKey, $sField, $sValue)
     {
         $oComposerContent = $this->getContent();
-        if(!array_key_exists($sKey, $oComposerContent)){
+        if (!array_key_exists($sKey, $oComposerContent)) {
             $oComposerContent->{$sKey} = new \stdClass();
         }
         $oComposerContent->{$sKey}->{$sField} = $sValue;
