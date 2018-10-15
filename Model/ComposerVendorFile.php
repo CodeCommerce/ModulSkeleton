@@ -79,7 +79,7 @@ class ComposerVendorFile extends ComposerFile
         return $this;
     }
 
-    public function getComposerName($bToLower = true)
+    public function getComposerName($bToLower = false)
     {
         $sComposerName = $this->getVendorNamespace() . "/" . $this->getModulName();
         if ($bToLower) {
@@ -224,7 +224,7 @@ class ComposerVendorFile extends ComposerFile
 
     protected function getComposerNamespaceFormated()
     {
-        $sVendorName = $this->getComposerName(false);
+        $sVendorName = $this->getComposerName();
         $sVendorNamespace = $sVendorName . "/";
         $sVendorNamespace = str_replace("//", "/", $sVendorNamespace);
         $sVendorNamespace = str_replace("/", "\\", $sVendorNamespace);
